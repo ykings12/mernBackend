@@ -4,7 +4,7 @@ import express from "express";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 
-//utils
+// utils
 import connectDB from "./config/db.js";
 import userRoutes from "./routes/userRoutes.js";
 import categoryRoutes from "./routes/categoryRoutes.js";
@@ -33,7 +33,12 @@ app.get("/api/config/paypal", (req, res) => {
   res.send({ clientId: process.env.PAYPAL_CLIENT_ID });
 });
 
+// Add a route for the root URL
+app.get("/", (req, res) => {
+  res.send("API is running...");
+});
+
 const __dirname = path.resolve();
-app.use("/uploads", express.static(path.join(__dirname + "/uploads")));
+app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 
 app.listen(port, () => console.log(`Server running on port: ${port}`));
